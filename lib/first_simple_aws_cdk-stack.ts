@@ -1,3 +1,4 @@
+import { Bucket } from '@aws-cdk/aws-s3';
 import * as cdk from '@aws-cdk/core';
 
 export class FirstSimpleAwsCdkStack extends cdk.Stack {
@@ -5,5 +6,11 @@ export class FirstSimpleAwsCdkStack extends cdk.Stack {
     super(scope, id, props);
 
     // The code that defines your stack goes here
+    const bucket = new Bucket(this, 'FistBucket', { });
+
+    new cdk.CfnOutput(this, 'FirstBucketCfnExport', {
+      value: bucket.bucketName,
+      exportName: 'FirstBucketName',
+    })
   }
 }
